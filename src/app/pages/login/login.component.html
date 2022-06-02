@@ -1,0 +1,40 @@
+<div class="bg-img img-b ">
+    <div>
+    </div>
+</div>
+<div class="d-flex flex-column h-100 py-33 w-100 align-items-center">
+    <div class="login-page d-flex flex-column flex-grow-1 overflow-auto">
+        <div class="header-login d-flex flex-column">
+      
+            <h1 class="text-center mb-0">לוגין <br></h1>
+            <p class="text-center font-bold"></p>
+
+        </div>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="d-flex flex-column align-items-center justify-content-center px-153">
+           
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>שם משתמש</mat-label>
+                <input matInput id="name" required
+                    name="name" autocomplete="off">
+            </mat-form-field>
+       
+
+
+            <mat-form-field class="w-100 mt-4" appearance="outline">
+                <mat-label>סיסמא</mat-label>
+                <input matInput [type]="hidePass ? 'password' : 'text'" id="password" required #password="ngModel"
+                    [(ngModel)]="loginFrm.password" name="password" [placeholder]="'PAGES.LOGIN.PASSWORD' | translate" autocomplete="off">
+                    <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+            <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors?.['required']">
+                {{'PAGES.LOGIN.REQUIRED' | translate}}
+            </mat-error>
+
+            <button mat-button class="login-btn mt-4" >{{'PAGES.LOGIN.LOGIN' | translate}}</button>
+        </form>
+    </div>
+
+    <div class="d-flex" [ngClass]="{'info-communication-green': isNetwork, 'info-communication-red': !isNetwork}">
+        <span>{{(isNetwork ? 'PAGES.LOGIN.NETWORK_WORKS' : 'PAGES.LOGIN.NETWORK_NOT_WORKS') | translate}}</span>
+    </div>
+</div>
